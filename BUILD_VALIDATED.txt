@@ -1,0 +1,26 @@
+BUILD VALIDATED — PATCH002
+
+Data da validação local: 2026-05-22
+
+Comandos executados no sandbox:
+
+npm install --no-audit --no-fund
+npm run build
+
+Resultado:
+
+- npm install: OK
+- Vite production build: OK
+- 76 modules transformed
+- dist gerado com sucesso
+
+Warnings observados:
+
+1. sessionHeartbeat importado dinâmica e estaticamente.
+2. Chunk JS principal acima de 500 kB após minificação.
+
+Classificação:
+
+- Verde para deploy inicial.
+- Amarelo para otimização futura de code splitting.
+- Sem bloqueio para PATCH002 frontend-first.

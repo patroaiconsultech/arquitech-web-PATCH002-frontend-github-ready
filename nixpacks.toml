@@ -1,0 +1,11 @@
+# Arquitech frontend — deploy seguro e desacoplado do backend.
+# Configure VITE_API_BASE_URL no ambiente do provedor para apontar ao backend atual.
+
+[phases.install]
+cmds = ["npm install"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm run start:prod"
