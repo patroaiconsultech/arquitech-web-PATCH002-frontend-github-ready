@@ -24,7 +24,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PatroaiLanding />} />
+        <Route path="/" element={<ArquitechLanding />} />
         <Route path="/patroai" element={<PatroaiLanding />} />
         <Route path="/orkio" element={<Landing />} />
         <Route path="/arquitech" element={<ArquitechLanding />} />
