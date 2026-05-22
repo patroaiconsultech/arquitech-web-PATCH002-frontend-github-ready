@@ -1,0 +1,17 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<title id="title">Arquitech monograma</title>
+<desc id="desc">Monograma geométrico inspirado em arquitetura, planta baixa e inteligência assistida.</desc>
+<rect width="256" height="256" rx="42" fill="#F6F4EF"/>
+<path d="M55 173V89H92" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M55 173H116" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+<path d="M76 184L126 48L185 184" stroke="#C5A15A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M105 134L170 82V184" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M65 105H38V201H98" stroke="#8D847A" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="8 7"/>
+<path d="M126 48V22" stroke="#C5A15A" stroke-width="2" stroke-linecap="round"/>
+<path d="M126 184V225" stroke="#C5A15A" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 7"/>
+<path d="M184 84C205 104 217 130 217 158C217 173 214 187 208 200" stroke="#8D847A" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="126" cy="48" r="5" fill="#8D847A"/>
+<circle cx="199" cy="105" r="5" fill="#8D847A"/>
+<circle cx="208" cy="200" r="5" fill="#8D847A"/>
+<circle cx="113" cy="153" r="3.5" fill="#C5A15A"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="smallGrid" width="36" height="36" patternUnits="userSpaceOnUse">
+    <path d="M36 0H0V36" stroke="#C4C4BE" stroke-opacity="0.22" stroke-width="1"/>
+  </pattern>
+  <pattern id="dashGrid" width="144" height="144" patternUnits="userSpaceOnUse">
+    <path d="M144 0H0V144" stroke="#8D847A" stroke-opacity="0.12" stroke-width="1.2" stroke-dasharray="7 8"/>
+  </pattern>
+</defs>
+<rect width="1440" height="900" fill="url(#smallGrid)"/>
+<rect width="1440" height="900" fill="url(#dashGrid)"/>
+<path d="M-80 690C210 390 520 326 860 480C1050 566 1220 546 1530 250" stroke="#C5A15A" stroke-opacity="0.16" stroke-width="2"/>
+<path d="M112 250H300V438H480" stroke="#1A1A1A" stroke-opacity="0.07" stroke-width="4"/>
+<path d="M910 120C1080 190 1185 326 1204 520" stroke="#C5A15A" stroke-opacity="0.18" stroke-width="2"/>
+<circle cx="300" cy="438" r="7" fill="#C5A15A" fill-opacity="0.26"/>
+<circle cx="910" cy="120" r="7" fill="#C5A15A" fill-opacity="0.26"/>
+<circle cx="1204" cy="520" r="7" fill="#C5A15A" fill-opacity="0.26"/>
+</svg>

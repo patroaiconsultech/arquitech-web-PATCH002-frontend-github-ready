@@ -1,0 +1,23 @@
+<svg width="920" height="220" viewBox="0 0 920 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<title id="title">Arquitech</title>
+<desc id="desc">Logotipo Arquitech — arquitetura assistida por IA.</desc>
+<rect width="920" height="220" fill="#F6F4EF"/>
+<g transform="translate(36 20) scale(0.72)">
+<path d="M55 173V89H92" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M55 173H116" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+<path d="M76 184L126 48L185 184" stroke="#C5A15A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M105 134L170 82V184" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M65 105H38V201H98" stroke="#8D847A" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="8 7"/>
+<path d="M126 48V22" stroke="#C5A15A" stroke-width="2" stroke-linecap="round"/>
+<path d="M126 184V225" stroke="#C5A15A" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 7"/>
+<path d="M184 84C205 104 217 130 217 158C217 173 214 187 208 200" stroke="#8D847A" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="126" cy="48" r="5" fill="#8D847A"/>
+<circle cx="199" cy="105" r="5" fill="#8D847A"/>
+<circle cx="208" cy="200" r="5" fill="#8D847A"/>
+<circle cx="113" cy="153" r="3.5" fill="#C5A15A"/>
+</g>
+<text x="232" y="112" fill="#1A1A1A" font-family="Georgia, 'Times New Roman', serif" font-size="68" letter-spacing="18">ARQUITECH</text>
+<line x1="232" y1="151" x2="306" y2="151" stroke="#C5A15A" stroke-width="3"/>
+<text x="336" y="158" fill="#8D847A" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="12">ARQUITETURA ASSISTIDA POR IA</text>
+<line x1="740" y1="151" x2="814" y2="151" stroke="#C5A15A" stroke-width="3"/>
+</svg>
