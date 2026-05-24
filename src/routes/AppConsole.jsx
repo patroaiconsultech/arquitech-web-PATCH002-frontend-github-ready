@@ -528,6 +528,32 @@ function resolveAssistantDisplayName(messageLike, fallback = "Agent") {
   return fallback;
 }
 
+
+// AO20K-HF4V_AGENT_FASTPATH_PREMIUM_POLISH
+function formatPremiumAgentDisplayName(value, fallback = "Agent") {
+  const base = canonicalizeSpeakerLabel(value || fallback);
+  const slug = String(base || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+
+  if (slug === "orion" || slug.startsWith("orion_")) return "Orion • CTO readonly";
+  if (slug === "chris" || slug.startsWith("chris_")) return "Chris • Estratégia";
+  if (slug === "team" || slug.startsWith("team_")) return "Team • Coordenação";
+  if (slug === "orkio" || slug.startsWith("orkio_")) return "Orkio";
+
+  return base || fallback;
+}
+
+function resolveAssistantPremiumDisplayName(messageLike, fallback = "Agent") {
+  return formatPremiumAgentDisplayName(
+    resolveAssistantDisplayName(messageLike, fallback),
+    fallback
+  );
+}
+
 function normalizeMessageSpeaker(messageLike) {
   if (!messageLike || String(messageLike?.role || "").toLowerCase() !== "assistant") {
     return messageLike;
@@ -866,8 +892,9 @@ function formatGithubRuntimeStatus(capabilities = null) {
 function formatActiveAgentRuntime(agentName = "") {
   const slug = String(agentName || "").trim().toLowerCase();
   if (!slug) return "";
-  if (slug.startsWith("orion")) return "Orion analisando";
-  if (slug.startsWith("chris")) return "Chris validando";
+  if (slug.startsWith("orion")) return "Orion • CTO readonly";
+  if (slug.startsWith("chris")) return "Chris • Estratégia";
+  if (slug.startsWith("team")) return "Team • Coordenação";
   if (slug.startsWith("auditor")) return "Auditor revisando";
   return "Orkio respondendo";
 }
@@ -1357,7 +1384,7 @@ const describeExecutionDone = (payload = {}) => ({
   kind: "done",
   label: "Execução concluída",
   detail: buildExecutionDoneDetail(payload),
-  agentName: "",
+  agentName: payload?.agent_name || payload?.final_speaker || payload?.visible_agent || "",
 });
 
 useEffect(() => { executionTraceRef.current = executionTrace || []; }, [executionTrace]);
@@ -5982,7 +6009,7 @@ async function stopRealtime(reason = 'client_stop') {
                   <div style={{ marginRight: 8, flexShrink: 0, alignSelf: "flex-start", marginTop: 4 }}>
                     <img
                       src={lastAgentInfo.avatar_url}
-                      alt={resolveAssistantDisplayName(m, "Agent")}
+                      alt={resolveAssistantPremiumDisplayName(m, "Agent")}
                       style={{ width: 36, height: 36, borderRadius: "50%", objectFit: "cover", border: "2px solid rgba(255,255,255,0.15)" }}
                       onError={(e) => { e.target.style.display = 'none'; }}
                     />
@@ -6004,7 +6031,7 @@ async function stopRealtime(reason = 'client_stop') {
                     const isSystem = m.role === "system";
                     const name = isUser
                       ? (m.user_name || meName)
-                      : (isSystem ? "Sistema" : resolveAssistantDisplayName(m, "Agent"));
+                      : (isSystem ? "Sistema" : resolveAssistantPremiumDisplayName(m, "Agent"));
                     const nameTone = isUser ? styles.nameUser : isSystem ? styles.nameSystem : styles.nameAgent;
                     const created = formatDateTime(m.created_at);
                     const visible = stripEventMarker(m.content);
@@ -6328,7 +6355,7 @@ async function stopRealtime(reason = 'client_stop') {
                       whiteSpace: "nowrap",
                     }}
                   >
-                    {step.agentName}
+                    {formatPremiumAgentDisplayName(step.agentName, step.agentName)}
                   </span>
                 ) : null}
               </div>
