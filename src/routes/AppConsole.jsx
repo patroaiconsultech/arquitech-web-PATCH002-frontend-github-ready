@@ -9,6 +9,53 @@ import OnboardingModal from "../components/OnboardingModal.jsx";
 import { startSessionHeartbeat } from "../lib/sessionHeartbeat.js";
 import EmptyStatePremium from "../components/EmptyStatePremium.jsx";
 import ExecutionTimeline from "../components/ExecutionTimeline.jsx";
+function normalizeUserFacingRuntimeMessage(value, context = "") {
+  const raw = String(value || "").trim();
+  const lower = raw.toLowerCase();
+
+  if (!raw) {
+    return context === "voice"
+      ? "Não consegui acessar a voz neste momento. Você pode continuar por texto."
+      : "Não consegui concluir esta ação agora.";
+  }
+
+  if (
+    lower.includes("requested device not found") ||
+    lower.includes("device not found") ||
+    lower.includes("notfounderror") ||
+    lower.includes("microphone not found") ||
+    lower.includes("no input devices")
+  ) {
+    return "Microfone não encontrado. Verifique se há um microfone conectado e se o navegador tem permissão para usá-lo. Você também pode continuar por texto.";
+  }
+
+  if (
+    lower.includes("permission denied") ||
+    lower.includes("notallowederror") ||
+    lower.includes("permission dismissed")
+  ) {
+    return "Permissão de microfone negada. Libere o acesso ao microfone no navegador ou continue por texto.";
+  }
+
+  if (
+    lower.includes("realtime connection failed") ||
+    lower.includes("realtime connection disconnected") ||
+    lower.includes("pc_failed")
+  ) {
+    return "A conexão de voz oscilou. A conversa por texto segue disponível normalmente.";
+  }
+
+  if (lower.includes("onboarding incomplete")) {
+    return "Para liberar este relatório, conclua o cadastro complementar. Se você acabou de salvar, abra uma nova conversa ou tente novamente em instantes.";
+  }
+
+  if (lower === "[object object]") {
+    return "Não consegui concluir esta ação agora. Tente novamente em instantes.";
+  }
+
+  return raw;
+}
+
 
 const ORKIO_ENV = (typeof window !== "undefined" && window.__ORKIO_ENV__) ? window.__ORKIO_ENV__ : {};
 const SUMMIT_VOICE_MODE = ((ORKIO_ENV.VITE_SUMMIT_VOICE_MODE || import.meta.env.VITE_SUMMIT_VOICE_MODE || "realtime").trim().toLowerCase() === "stt_tts")
@@ -3486,7 +3533,7 @@ async function sendMessage(presetMsg = null, opts = {}) {
         });
         // BUG-04 FIX: trocar alert() por setV2vError — alert() bloqueia JS thread
         // e impede o V2V de reiniciar o microfone
-        setV2vError(e?.message || "Falha ao enviar mensagem");
+        setV2vError(normalizeUserFacingRuntimeMessage(e?.message || "Falha ao enviar mensagem"));
       }
     } finally {
       const stillCurrentTurn =
@@ -3669,7 +3716,7 @@ async function sendMessage(presetMsg = null, opts = {}) {
             } catch (e) {
               console.error('[V2V] v2v_stt_fail trace_id=%s error:', trace, e);
               setV2vPhase('error');
-              setV2vError(`STT falhou: ${e?.message || 'erro desconhecido'}`);
+              setV2vError(normalizeUserFacingRuntimeMessage(e?.message || "erro desconhecido", "voice"));
               setUploadStatus(`❌ STT: ${e?.message || 'Erro de transcrição'}`);
               setTimeout(() => setUploadStatus(''), 3000);
             }
@@ -6034,7 +6081,7 @@ async function stopRealtime(reason = 'client_stop') {
                       : (isSystem ? "Sistema" : resolveAssistantPremiumDisplayName(m, "Agent"));
                     const nameTone = isUser ? styles.nameUser : isSystem ? styles.nameSystem : styles.nameAgent;
                     const created = formatDateTime(m.created_at);
-                    const visible = stripEventMarker(m.content);
+                    const visibleRaw = stripEventMarker(m.content); const visible = normalizeUserFacingRuntimeMessage(visibleRaw || m.content);
 
                     return (
                       <>
